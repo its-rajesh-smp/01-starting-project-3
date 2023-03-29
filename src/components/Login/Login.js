@@ -18,7 +18,6 @@ const reducerEmailFunctions=(emailState,action)=>{
   return {value:"",isValid:false}
 }
 
-
 const reducerPasswordFunctions=(passWordState,action)=>{
   if(action.type==="SET_PASSWORD")
   {

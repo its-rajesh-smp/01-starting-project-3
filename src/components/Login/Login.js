@@ -1,8 +1,9 @@
-import React, {  useReducer, useState ,useEffect} from 'react';
+import React, {  useReducer, useState ,useEffect ,useContext} from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import IsLoggedIn_Context from '../../Context/LogIn/isLoggedIn-Context';
 
 
 const reducerEmailFunctions=(emailState,action)=>{
@@ -42,15 +43,6 @@ const Login = (props) => {
   const[emailState,dispatchEmail]=useReducer(reducerEmailFunctions,{value:"",isValid:null})
   const[passWordState,dispatchPassword]=useReducer(reducerPasswordFunctions,{value:"",isValid:null})
 
-
-
-  // useEffect(()=>{
-  //   console.log("MAIN FUNCTION");
-
-  //   return ()=>{
-  //     console.log("CLEANER FUNCTION");
-  //   }
-  // },[enteredEmail])
 
  
 
@@ -92,8 +84,11 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(emailState.value, passWordState.value);
+   context.loginHandler(emailState.value, passWordState.value);
   };
+
+
+  const context=useContext(IsLoggedIn_Context)
 
   return (
     <Card className={classes.login}>

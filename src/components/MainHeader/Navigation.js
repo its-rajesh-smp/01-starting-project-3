@@ -1,35 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import classes from './Navigation.module.css';
-import IsLoggedInContext from '../../Context/LogIn/isLoggedIn-Context';
+import IsLoggedIn_Context from '../../Context/LogIn/isLoggedIn-Context';
 
 
-const Navigation = (props) => {
+const Navigation = () => {
+
+
+  const context=useContext(IsLoggedIn_Context)
+
   return (
-    <IsLoggedInContext.Consumer>
-      {(jx)=>{
-        return (
-          <nav className={classes.nav}>
+    <>
+    <nav className={classes.nav}>
           <ul>
-            {jx.isLoggedIn && (
+            {context.isLoggedIn && (
               <li>
                 <a href="/">Users</a>
               </li>
             )}
-            {jx.isLoggedIn && (
+            {context.isLoggedIn && (
               <li>
                 <a href="/">Admin</a>
               </li>
             )}
-            {jx.isLoggedIn && (
+            {context.isLoggedIn && (
               <li>
-                <button onClick={props.onLogout}>Logout</button>
+                <button onClick={context.logoutHandler}>Logout</button>
               </li>
             )}
           </ul>
         </nav>
-        )
-      }}
-    </IsLoggedInContext.Consumer>
+    </>
   );
 };
 
